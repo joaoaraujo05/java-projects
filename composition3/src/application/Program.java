@@ -15,7 +15,6 @@ public class Program {
 
         LocalDateTime localDateTime = LocalDateTime.now();
 
-
         System.out.println("Enter client data: ");
         System.out.print("Name: ");
         String name = sc.nextLine();
@@ -30,8 +29,9 @@ public class Program {
         System.out.println("Enter order data: ");
         System.out.print("Status: ");
         sc.nextLine();
-        String status = sc.nextLine();
-        Order order = new Order(OrderStatus.valueOf(status), client); // tem que passar os dados do cliente para a classe order
+        OrderStatus status = OrderStatus.valueOf(sc.nextLine());
+
+        Order order = new Order(localDateTime, status, client); // tem que passar os dados do cliente para a classe order
 
         System.out.print("How many items to this order? ");
         int n = sc.nextInt();
@@ -45,10 +45,15 @@ public class Program {
             double productPrice = sc.nextDouble();
             System.out.print("Quantity: ");
             int quantity = sc.nextInt();
-            OrderItem items = new OrderItem(quantity, productPrice, new Product(productName));
+
+            Product product = new Product(productName, productPrice);
+
+            OrderItem items = new OrderItem(quantity, productPrice, product);
+
             order.addItems(items);
         }
 
+        System.out.println();
         System.out.println("ORDER SUMMARY");
         System.out.println("Order moment: " + localDateTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")));
         System.out.println("Order status: " + order.getStatus());

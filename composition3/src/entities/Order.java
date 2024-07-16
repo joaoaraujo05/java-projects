@@ -12,13 +12,9 @@ public class Order {
 
     public Order(){}
 
-    public Order(OrderStatus status, Client client) {
-        this.status = status;
-        this.client = client;
-    }
-
-    public Order(LocalDateTime moment, Client client) {
+    public Order(LocalDateTime moment, OrderStatus status, Client client) {
         this.moment = moment;
+        this.status = status;
         this.client = client;
     }
 
@@ -44,10 +40,6 @@ public class Order {
 
     public void setClient(Client client) {
         this.client = client;
-    }
-
-    public List<OrderItem> getItems() {
-        return items;
     }
 
     public void addItems(OrderItem item) {
